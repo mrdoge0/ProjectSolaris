@@ -1,0 +1,3 @@
+on post-fs:
+  # Run the post-fs hook
+  /system/bin/sh /system/solaris/post-fs-hook.sh
