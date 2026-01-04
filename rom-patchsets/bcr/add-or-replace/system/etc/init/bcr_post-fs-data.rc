@@ -1,0 +1,2 @@
+on post-fs-data:
+  /system/bin/sh /system/solaris/bcr_post-fs-data.sh
