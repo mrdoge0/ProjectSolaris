@@ -1,0 +1,5 @@
+service bcr /system/solaris/bcr_service.sh
+  class late_start
+  oneshot
+  user root
+  group root
