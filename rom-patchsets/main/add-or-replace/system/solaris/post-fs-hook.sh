@@ -18,8 +18,8 @@ RP_BIN='/system/solaris/resetprop'
 if [ "${SPOOF_PROPS}" == 'true' ]; then
   "${RP_BIN}" -n 'ro.product.brand' "${BRAND}"
   "${RP_BIN}" -n 'ro.product.manufacturer' "${MANUFACTURER}"
-  "${RP_BIN}" -n 'ro.product.device' "${DEVC}"
-  "${RP_BIN}" -n 'ro.product.model' "${MODL}"
-  "${RP_BIN}" -n 'ro.product.brand_device_name' "${MRNM_FULL}"
+  "${RP_BIN}" -n 'ro.product.device' "${DEVICE}"
+  "${RP_BIN}" -n 'ro.product.model' "${MODEL}"
+  "${RP_BIN}" -n 'ro.product.brand_device_name' "${MARKETNAME}"
   "${RP_BIN}" -n 'ro.build.fingerprint' "${FINGERPRINT}"
 fi
