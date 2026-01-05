@@ -1,0 +1,2 @@
+# Use Vulkan by default
+debug.hwui.renderer=skiavk
