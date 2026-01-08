@@ -1,0 +1,3 @@
+solaris/bcr_boot_common.sh 755
+solaris/bcr_post-fs-data.sh 755
+solaris/bcr_service.sh 755
