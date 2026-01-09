@@ -10,4 +10,8 @@ app/YouTube
 app/YTMusic
 priv-app/AICorePrebuilt
 priv-app/AndroidSystemIntelligence
+priv-app/FilesGoogle
 priv-app/OdadPrebuilt
+overlay/GmsConfigOverlayODAD.apk
+overlay/GmsConfigOverlayPhotos.apk
+overlay/GoogleDocumentsUIOverlay.apk
