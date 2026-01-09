@@ -21,19 +21,14 @@ install_patchset() {
     done
   fi
 
-  # Handle system_ext.delete.list
-  if [ -f "./rom-patchsets/${PATCHSET}/system_ext.delete.list" ]; then
-    cat "./rom-patchsets/${PATCHSET}/system_ext.delete.list" | while IFS= read -r TARGET_FILE_OR_DIR; do
-      rm -rvf "./work/system_ext/${TARGET_FILE_OR_DIR}" || exit 1
-    done
-  fi
-
-  # Handle product.delete.list
-  if [ -f "./rom-patchsets/${PATCHSET}/product.delete.list" ]; then
-    cat "./rom-patchsets/${PATCHSET}/product.delete.list" | while IFS= read -r TARGET_FILE_OR_DIR; do
-      rm -rvf "./work/product/${TARGET_FILE_OR_DIR}" || exit 1
-    done
-  fi
+  # Handle .delete.list for system splits
+  for SPLIT in system_ext product; do
+    if [ -f "./rom-patchsets/${PATCHSET}/${SPLIT}.delete.list" ]; then
+      cat "./rom-patchsets/${PATCHSET}/${SPLIT}.delete.list" | while IFS= read -r TARGET_FILE_OR_DIR; do
+        rm -rvf "./work/${SPLIT}/${TARGET_FILE_OR_DIR}" || exit 1
+      done
+    fi
+  done
 
   # Handle add-or-replace
   if [ -d "./rom-patchsets/${PATCHSET}/add-or-replace" ]; then
