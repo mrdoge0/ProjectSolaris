@@ -96,3 +96,15 @@ EOF
     done
   fi
 }
+
+## 
+## DOWNLOAD IMAGES
+## 
+dl_images() {
+  case "${1}" in
+    atom)
+    latest)
+    *) echo 'Specify atom or latest to dl_images.'
+       exit 1;;
+  esac
+}
