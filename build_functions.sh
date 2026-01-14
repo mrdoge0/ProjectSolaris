@@ -141,8 +141,48 @@ dl_images() {
                  done;;
             *) exit 1;;
           esac;;
-    latest) case "${3}" in
-            esac;;
+    latest) echo "Searching Nothing Archive for the latest build of ${2}..."
+            A="$(curl -s "https://api.github.com/repos/spike0en/nothing_archive/releases" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | grep "^${2}_" | head -n 1)"
+            [ -z "${A}" ] && echo 'Error while searching Nothing Archive for the latest build!' && exit 1
+            case "${3}" in
+            logical) echo "Downloading logical images for atom ${A}..."
+                     wget -q -o "dlcache/${2}_latest.logical.001" "https://github.com/spike0en/nothing_archive/releases/download/${A}/${A}-image-logical.7z.001"
+                     case ${?} in
+                       0) echo 'Downloaded.';;
+                       *) exit 1;;
+                     esac
+                     for LOGICALNUM in 002 003 004 005 006; do
+                       wget -q -o "dlcache/${2}_latest.logical.${LOGICALNUM}" "https://github.com/spike0en/nothing_archive/releases/download/${A}/${A}-image-logical.7z.${LOGICALNUM}"
+                       case ${?} in
+                         0|8) echo 'Downloaded or not needed.';;
+                         *) exit 1;;
+                       esac
+                     done;;
+            all) echo "Downloading all images for atom ${A}..."
+                 wget -q -o "dlcache/${2}_latest.fw" "https://github.com/spike0en/nothing_archive/releases/download/${A}/${A}-image-firmware.7z"
+                 case ${?} in
+                   0) echo 'Downloaded.';;
+                   *) exit 1;;
+                 esac
+                 wget -q -o "dlcache/${2}_latest.boot" "https://github.com/spike0en/nothing_archive/releases/download/${A}/${A}-image-boot.7z"
+                 case ${?} in
+                   0) echo 'Downloaded.';;
+                   *) exit 1;;
+                 esac
+                 wget -q -o "dlcache/${2}_latest.logical.001" "https://github.com/spike0en/nothing_archive/releases/download/${A}/${A}-image-logical.7z.001"
+                 case ${?} in
+                   0) echo 'Downloaded.';;
+                   *) exit 1;;
+                 esac
+                 for LOGICALNUM in 002 003 004 005 006; do
+                   wget -q -o "dlcache/${2}_latest.logical.${LOGICALNUM}" "https://github.com/spike0en/nothing_archive/releases/download/${A}/${A}-image-logical.7z.${LOGICALNUM}"
+                   case ${?} in
+                     0|8) echo 'Downloaded or not needed.';;
+                     *) exit 1;;
+                   esac
+                 done;;
+            *) exit 1;;
+          esac;;
     *) echo 'Specify atom or latest to dl_images. (eg. "dl_images atom Pong_B4.0-251226-1110 all" or "dl_images latest Metroid logical")'
        exit 1;;
   esac
