@@ -183,7 +183,83 @@ dl_images() {
                  done;;
             *) exit 1;;
           esac;;
-    *) echo 'Specify atom or latest to dl_images. (eg. "dl_images atom Pong_B4.0-251226-1110 all" or "dl_images latest Metroid logical")'
+    *) echo 'Specify atom or latest to dl_images. (eg. "dl_images atom Pong_B4.0-251226-1110 all", "dl_images latest Spacewar all" or "dl_images latest Metroid logical")'
        exit 1;;
   esac
+}
+
+## 
+## USE SYSTEM IMAGES
+## 
+use_system_images() {
+  # Figure out the target atom
+  case "${1}" in
+    atom) TARGET_ATOM="${2}";;
+    latest) TARGET_ATOM="${2}_latest";;
+    *) exit 1;;
+  esac
+
+  # Check if the atom is already downloaded
+  if [ ! -f "dlcache/${TARGET_ATOM}.loglcal.001" ]; then
+    echo "${TARGET_ATOM} is not downloaded!"
+    echo "Please check the target script!"
+    exit 1
+  fi
+
+  # Create work/origimgs, just in case
+  mkdir -p 'work/origimgs'
+
+  # Extract system, system_ext and product
+  for IMG in 'system' 'system_ext' 'product'; do
+    7z e "dlcache/${TARGET_ATOM}.logical.001" -o'work/origimgs' "${IMG}.img" || exit 1
+  done
+}
+
+## 
+## USE VENDOR IMAGES
+## 
+use_vendor_images() {
+  # Figure out the target atom
+  case "${1}" in
+    atom) TARGET_ATOM="${2}";;
+    latest) TARGET_ATOM="${2}_latest";;
+    *) exit 1;;
+  esac
+
+  # Check if the atom is already downloaded
+  if [ ! -f "dlcache/${TARGET_ATOM}.loglcal.001" ]; then
+    echo "${TARGET_ATOM} is not downloaded!"
+    echo "Please check the target script!"
+    exit 1
+  fi
+
+  # Create work/origimgs, just in case
+  mkdir -p 'work/origimgs'
+
+  # Extract vendor and odm
+  for IMG in 'vendor' 'odm'; do
+    7z e "dlcache/${TARGET_ATOM}.logical.001" -o'work/origimgs' "${IMG}.img" || exit 1
+  done
+
+  # Extract boot images
+  for TARBALL in 'boot' 'fw'; do
+    7z x "dlcache/${TARGET_ATOM}.${TARBALL}" -o'work/origimgs' || exit 1
+  done
+}
+
+## 
+## EXTRACT TO WORK
+## 
+extract_to_work() {
+  # Only EROFS for now :( (although all fully supported Nothings ARE fully EROFS)
+  case "${1}" in
+    erofs) EXT4_OR_EROFS='erofs';;
+    ext4) echo 'ERROR: Ext4 unpacking support is not implemented yet.'; exit 1;;
+    *) exit 1;;
+  esac
+
+  # Remake dirs for just in case
+  mkdir -p 'work/system'
+  mkdir -p 'work/system_ext'
+  mkdir -p 'work/product'
 }
