@@ -1,1 +1,5 @@
 build-tools/mkuserimg_mke2fs.py 755
+build-tools/dump.erofs 755
+build-tools/extract.erofs 755
+build-tools/fsck.erofs 755
+build-tools/fuse.erofs 755
