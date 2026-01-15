@@ -1,14 +1,8 @@
-# Ext4 handling
 mke2fs
 e2fsdroid
 python3
-
-# EROFS handling
-dump.erofs
-mkfs.erofs
-
-# Absolut core
 bash
 wget
 sed
 awk
+7z
