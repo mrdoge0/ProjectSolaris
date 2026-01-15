@@ -8,7 +8,7 @@ if [ -f "./source_root.attr_override.list" ]; then
     chmod -Rv "${TGT_ATTR}" "./${TGT_FILE_OR_DIR}" || exit 1
   done
 else
-  echo 'Always run ALL scripts of this project while your PWD is the root of the cloned repository.'
+  echo 'Pro tip: Always run ALL scripts of this project while your PWD is the root of the cloned repository.'
   exit 1
 fi
 
