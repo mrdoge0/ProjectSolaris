@@ -25,6 +25,9 @@ install_patchset Spacewar
 # Package system and it's splits to Ext4 images
 package_work ext4
 
+# Install vendor_boot mod
+install_vendorboot_mod Spacewar
+
 # Package result both in a Fastboot package, AND a payload update
 package_to_out fastboot
 package_to_out payload
