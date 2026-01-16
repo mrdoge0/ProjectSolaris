@@ -1,7 +1,7 @@
 #!/bin/bash
 # bootstrap the source
 
-if [ -f "./source_root.attr_override.list" ]; then
+if [ -f "./.PROJECTSOLARIS_SOURCE_MARK" ] && [ -f "./source_root.attr_override.list" ]; then
   cat "./source_root.attr_override.list" | while IFS= read -r TARGET_LINE; do
     TGT_FILE_OR_DIR="$(echo "${TARGET_LINE}" | cut -d' ' -f1)"
     TGT_ATTR="$(echo "${TARGET_LINE}" | cut -d' ' -f2)"
