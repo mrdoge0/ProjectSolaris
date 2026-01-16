@@ -21,6 +21,9 @@ install_patchset native-mod
 # Package system and it's splits to EROFS images
 package_work erofs
 
+# Install vendor_boot mod
+install_vendorboot_mod Pong
+
 # Package result both in a Fastboot package, AND a payload update
 package_to_out fastboot
 package_to_out payload
