@@ -258,8 +258,20 @@ extract_to_work() {
     *) exit 1;;
   esac
 
-  # Remake dirs for just in case
-  mkdir -p 'work/system'
-  mkdir -p 'work/system_ext'
-  mkdir -p 'work/product'
+  # Extraction function(s)
+  for IMG in 'system' 'system_ext' 'product'; do
+    if [ "${EXT4_OR_EROFS}" == 'erofs' ]; then
+      # go to work since extract.erofs always extracts to $(pwd)/[IMG_NAME]
+      cd ./work
+      
+      # extract.erofs has a very weird path recognition, so we're using '$(pwd)' instead of '.' path.
+      ../build-tools/extract.erofs -i "$(pwd)/origimgs/${IMG}.img" -x "$(pwd)" || exit 1
+      
+      # rename config, so it won't get overwritten
+      mv -vf './config' "./${IMG}.config" || exit 1
+
+      # go back to source root
+      cd ..
+    fi
+  done
 }
