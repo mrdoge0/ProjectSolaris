@@ -272,6 +272,27 @@ extract_to_work() {
 
       # go back to source root
       cd ..
+    else
+      exit 1
     fi
   done
+}
+
+## 
+## PACKAGE WORK
+## 
+package_work() {
+  # Now there's Spacewar too in the target devices, so we *have to* support ext4 in initial revision :D
+  case "${1}" in
+    erofs) EXT4_OR_EROFS='erofs';;
+    ext4) EXT4_OR_EROFS='ext4';;
+    *) exit 1;;
+  esac
+
+  # Depending on the target FS
+  if [ "${EXT4_OR_EROFS}" == 'erofs' ]; then
+  elif [ "${EXT4_OR_EROFS}" == 'ext4' ]; then
+  else
+    exit 1
+  fi
 }
