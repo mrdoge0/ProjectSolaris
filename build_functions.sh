@@ -289,8 +289,25 @@ package_work() {
     *) exit 1;;
   esac
 
+  # Make outimgs
+  mkdir "./outimgs"
+
   # Depending on the target FS
   if [ "${EXT4_OR_EROFS}" == 'erofs' ]; then
+    for IMG in 'system' 'system_ext' 'product'; do
+      # Declare filesystem UUID to temporary env
+      FS_UUID="$(cat "./work/${IMG}.config/${IMG}_fs_options" | grep "^Filesystem UUID:" | rev | cut -d' ' -f1 | rev)"
+
+      # Declare mount point (/ in system because of SaR)
+      if [ "${IMG}" == 'system' ]; then
+        FS_MP='/'
+      else
+        FS_MP="/${IMG}"
+      fi
+
+      # Make new EROFS to outimgs (exact same format as the *_fs_options since I don't trust erofs utils that the repo has prebuilt when it comes to argument parsing :D)
+      ./build-tools/mkfs.erofs -zlz4hc -T 0 -U ${FS_UUID} --mount-point=${FS_MP} --fs-config-file=./work/${IMG}.config/${IMG}_fs_config --file-contexts=./work/${IMG}.config/${IMG}_file_contexts ./outimgs/${IMG}.img ./work/${IMG} || exit 1
+    done
   elif [ "${EXT4_OR_EROFS}" == 'ext4' ]; then
   else
     exit 1
