@@ -1,2 +1,2 @@
-solaris/post-fs-hook.sh 755
-solaris/resetprop 755
+solaris/post-fs-hook.sh 0 0 755
+solaris/resetprop 0 0 755
