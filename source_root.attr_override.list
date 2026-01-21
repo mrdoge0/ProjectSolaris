@@ -1,6 +1,6 @@
-build-tools/mkuserimg_mke2fs.py 755
-build-tools/dump.erofs 755
-build-tools/extract.erofs 755
-build-tools/fsck.erofs 755
-build-tools/fuse.erofs 755
-build-tools/mkfs.erofs 755
+build-tools/mkuserimg_mke2fs.py 0 0 0755
+build-tools/dump.erofs 0 0 0755
+build-tools/extract.erofs 0 0 0755
+build-tools/fsck.erofs 0 0 0755
+build-tools/fuse.erofs 0 0 0755
+build-tools/mkfs.erofs 0 0 0755
