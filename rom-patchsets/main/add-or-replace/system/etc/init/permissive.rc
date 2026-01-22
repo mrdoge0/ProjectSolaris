@@ -1,0 +1,3 @@
+on fs:
+  # let's start with permissive mode on the start and then back to enforcing when it's stable on enforcing :3
+  setenforce 0
