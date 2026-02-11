@@ -4,3 +4,6 @@ build-tools/extract.erofs na na 0755
 build-tools/fsck.erofs na na 0755
 build-tools/fuse.erofs na na 0755
 build-tools/mkfs.erofs na na 0755
+brunch.sh na na 0755
+checkup.sh na na 0755
+clean.sh na na 0755
