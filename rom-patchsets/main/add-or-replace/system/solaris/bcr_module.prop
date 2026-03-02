@@ -1,0 +1,7 @@
+id=com.chiller3.bcr
+name=BCR
+version=v2.7
+versionCode=132864
+author=chenxiaolong
+description=Basic Call Recorder
+updateJson=https://github.com/chenxiaolong/BCR/raw/master/app/magisk/updates/release/info.json
