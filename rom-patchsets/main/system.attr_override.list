@@ -1,2 +1,5 @@
 solaris/post-fs-hook.sh 0 0 0755
 solaris/resetprop 0 0 0755
+solaris/bcr_boot_common.sh 0 0 0755
+solaris/bcr_post-fs-data.sh 0 0 0755
+solaris/bcr_service.sh 0 0 0755
